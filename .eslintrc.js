@@ -1,9 +1,8 @@
-// @ts-check
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { defineConfig } = require('eslint-define-config');
-
 // https://github.com/nestjs/nest/blob/master/.eslintrc.js
-module.exports = defineConfig({
+/**
+ * @type {import('eslint-define-config').ESLintConfig}
+ */
+module.exports = {
   root: true,
   env: {
     node: true,
@@ -50,4 +49,4 @@ module.exports = defineConfig({
       },
     },
   ],
-});
+};

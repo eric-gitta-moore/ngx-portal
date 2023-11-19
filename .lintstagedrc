@@ -1,3 +1,0 @@
-{
-  "*.{vue,js,ts,jsx,tsx,vue}": ["eslint", "prettier -c"]
-}

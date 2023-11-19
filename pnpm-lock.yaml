@@ -16,6 +16,9 @@ devDependencies:
   '@commitlint/config-conventional':
     specifier: ^18.1.0
     version: 18.4.0
+  '@commitlint/types':
+    specifier: ^18.4.0
+    version: 18.4.0
   '@types/express':
     specifier: ^4.17.20
     version: 4.17.21
