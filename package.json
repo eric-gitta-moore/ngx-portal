@@ -8,7 +8,7 @@
     "build": "rimraf dist && webpack",
     "start": "ts-node src/app.ts",
     "start:prod": "npm run build && cross-env NODE_ENV=prod node dist/main.js",
-    "build:docker": "docker build -t svg2bitmap .",
+    "build:docker": "docker build -t ngx-portal .",
     "prepare": "husky install"
   },
   "devDependencies": {

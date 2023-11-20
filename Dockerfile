@@ -1,5 +1,6 @@
 FROM node:20-alpine3.17 AS builder
 COPY . /app
+WORKDIR /app
 RUN npm config set registry https://registry.npmmirror.com && npm i -g pnpm
 RUN pnpm i && pnpm run build
 
