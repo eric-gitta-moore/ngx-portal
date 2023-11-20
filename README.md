@@ -74,3 +74,5 @@ const defaultParam: IndexApiParam = {
   },
 };
 ```
+
+[example.http](docs/example.http)

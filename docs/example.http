@@ -1,0 +1,37 @@
+#### healthycheck
+GET http://localhost/
+
+
+#### e.g. BarVerticalComponent
+POST http://localhost/portal
+Content-Type: application/json
+
+< ./data/bar.json
+
+
+### e.g. BarHorizontalComponent
+POST http://localhost/portal
+Content-Type: application/json
+
+< ./data/bar.json
+
+
+### e.g. PieChartComponent
+POST http://localhost/portal
+Content-Type: application/json
+
+< ./data/pie.json
+
+
+### e.g. LineChartComponent
+POST http://localhost/portal
+Content-Type: application/json
+
+< ./data/line.json
+
+
+### e.g. AreaChartComponent
+POST http://localhost/portal
+Content-Type: application/json
+
+< ./data/aria.json
