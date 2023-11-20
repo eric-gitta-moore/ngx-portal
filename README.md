@@ -3,16 +3,44 @@
 api:
 
 ```ts
-import { IndexApiParam } from './portal';
+export type NgxOptions = Record<string, unknown>;
 
-type IndexApiParam = {
-  type?: string;
+export enum ChartType {
+  AdvancedPieChartComponent = 'AdvancedPieChartComponent',
+  AreaChartComponent = 'AreaChartComponent',
+  AreaChartNormalizedComponent = 'AreaChartNormalizedComponent',
+  AreaChartStackedComponent = 'AreaChartStackedComponent',
+  BarHorizontal2DComponent = 'BarHorizontal2DComponent',
+  BarHorizontalComponent = 'BarHorizontalComponent',
+  BarHorizontalNormalizedComponent = 'BarHorizontalNormalizedComponent',
+  BarHorizontalStackedComponent = 'BarHorizontalStackedComponent',
+  BarVertical2DComponent = 'BarVertical2DComponent',
+  BarVerticalComponent = 'BarVerticalComponent',
+  BarVerticalNormalizedComponent = 'BarVerticalNormalizedComponent',
+  BarVerticalStackedComponent = 'BarVerticalStackedComponent',
+  BoxChartComponent = 'BoxChartComponent',
+  BubbleChartComponent = 'BubbleChartComponent',
+  GaugeComponent = 'GaugeComponent',
+  HeatMapComponent = 'HeatMapComponent',
+  LineChartComponent = 'LineChartComponent',
+  LinearGaugeComponent = 'LinearGaugeComponent',
+  NumberCardComponent = 'NumberCardComponent',
+  PieChartComponent = 'PieChartComponent',
+  PieGridComponent = 'PieGridComponent',
+  PolarChartComponent = 'PolarChartComponent',
+  SankeyComponent = 'SankeyComponent',
+  TreeMapComponent = 'TreeMapComponent',
+}
+
+export interface ChartParam {
+  type: ChartType;
   externalCSS?: string;
-  ngxOptions?: Partial<Record<string, unknown>>;
-};
+  ngxOptions?: Partial<NgxOptions>;
+}
 
-// 默认参数
-const defaultParam: IndexApiParam = {
+export type IndexApiParam = Partial<ChartParam>;
+
+const exampleJson: IndexApiParam = {
   type: 'BarVerticalComponent',
   externalCSS: '',
   ngxOptions: {
