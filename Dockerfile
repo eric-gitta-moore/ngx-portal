@@ -9,4 +9,4 @@ ENV workdir=/app
 WORKDIR ${workdir}
 USER root
 COPY --from=builder /app/dist/ ${workdir}
-ENTRYPOINT node ${workdir}/app.js
+ENTRYPOINT node ${workdir}/main.js
