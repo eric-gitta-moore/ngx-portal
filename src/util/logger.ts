@@ -1,5 +1,5 @@
-import npmlog from 'npmlog';
+import logger from 'npmlog';
 
-npmlog.heading = `[logger]`;
+logger.heading = `[logger]`;
 
-export default npmlog;
+export default logger;
