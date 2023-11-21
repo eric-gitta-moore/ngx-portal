@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { ngxRenderUrl, svg2bitmapUrl } from '../config/config';
 import logger from '../util/logger';
+import { stringify } from 'superjson';
 
 export type NgxOptions = Record<string, unknown>;
 
@@ -54,7 +55,7 @@ export async function portal(req: Request, res: Response) {
     logger.info(`portal`, `requesting ${ngxRenderUrl}`);
     let response = await fetch(ngxRenderUrl, {
       method: 'POST',
-      body: JSON.stringify(param),
+      body: stringify(param),
       headers: { 'Content-Type': 'application/json' },
     });
     const html = await response.text();

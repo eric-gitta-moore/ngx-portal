@@ -104,3 +104,12 @@ const exampleJson: IndexApiParam = {
 ```
 
 [example.http](docs/example.http)
+
+
+## development
+```shell
+# webpack bundle
+yarn serve:build
+# nodemon
+yarn serve
+```
