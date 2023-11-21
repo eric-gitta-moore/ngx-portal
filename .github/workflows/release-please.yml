@@ -16,5 +16,6 @@ jobs:
     steps:
       - uses: google-github-actions/release-please-action@v3
         with:
+          token: ${{ secrets.ACCOUNT_TOKEN }}
           release-type: node
           package-name: ngx-portal
