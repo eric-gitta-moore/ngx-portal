@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/james-curtis/ngx-portal/compare/v0.1.1...v0.1.2) (2023-11-21)
+
+
+### Bug Fixes
+
+* ci docker ([c41b9dd](https://github.com/james-curtis/ngx-portal/commit/c41b9dd6ea63e063014b5a90ec9654ade93633a5))
+
 ## [0.1.1](https://github.com/james-curtis/ngx-portal/compare/v0.1.0...v0.1.1) (2023-11-21)
 
 
