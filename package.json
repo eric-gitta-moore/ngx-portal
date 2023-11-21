@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "export `cat .env | grep -v \"^#\"` && nodemon dist/main.js",
-    "serve:build": "yarn clean && cross-env NODE_ENV=development webpack --config webpack.config.dev.ts watch",
+    "serve:build": "yarn clean && cross-env NODE_ENV=development webpack watch --config webpack.config.dev.ts",
     "build:prod": "yarn clean && cross-env NODE_ENV=production webpack --config webpack.config.prod.ts",
     "start:prod": "export `cat .env.prod | grep -v \"^#\"` && node dist/main.js",
     "build:docker": "docker build -t ngx-portal .",
@@ -15,6 +15,7 @@
     "@commitlint/cli": "^18.2.0",
     "@commitlint/config-conventional": "^18.1.0",
     "@commitlint/types": "^18.4.0",
+    "@swimlane/ngx-charts": "^20.5.0",
     "@types/express": "^4.17.20",
     "@types/node": "^20.8.10",
     "@types/npmlog": "^4.1.6",

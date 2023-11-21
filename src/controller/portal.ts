@@ -2,8 +2,12 @@ import { Request, Response } from 'express';
 import { ngxRenderUrl, svg2bitmapUrl } from '../config/config';
 import logger from '../util/logger';
 import { stringify } from 'superjson';
+import { MultiSeries } from '@swimlane/ngx-charts';
 
-export type NgxOptions = Record<string, unknown>;
+export type NgxOptions = {
+  [key: string]: unknown;
+  results: MultiSeries;
+};
 
 export enum ChartType {
   AdvancedPieChartComponent = 'AdvancedPieChartComponent',
@@ -40,7 +44,9 @@ export interface ChartParam {
 
 export type IndexApiParam = Partial<ChartParam>;
 
-export type NgxRenderApiParam = Partial<ChartParam>;
+export interface NgxRenderApiParam extends ChartParam {
+  ngxOptions?: Partial<NgxOptions>;
+}
 
 export interface SvgApiParam {
   url?: string;
@@ -48,8 +54,34 @@ export interface SvgApiParam {
   locator?: string;
 }
 
+export function preprocessing(param: IndexApiParam): IndexApiParam {
+  function transformString2Date(arr: any[]) {
+    function isDate(str: string): boolean {
+      try {
+        new Date(str).toISOString();
+      } catch (e) {
+        return false;
+      }
+      return true;
+    }
+
+    if (isDate(arr?.[0].name) && new Date(arr?.[0].name)?.toISOString() === arr?.[0].name) {
+      arr.map((e) => {
+        if (new Date(e.name).toISOString() === e.name) {
+          e.name = new Date(e.name);
+        }
+      });
+    }
+  }
+
+  param.ngxOptions?.results && transformString2Date(param.ngxOptions?.results);
+  param.ngxOptions?.results?.map((e) => transformString2Date(e.series));
+  return param;
+}
+
 export async function portal(req: Request, res: Response) {
-  const param: NgxRenderApiParam = Object.assign({}, req.params, req.body) as IndexApiParam;
+  let param: IndexApiParam = Object.assign({}, req.params, req.body) as NgxRenderApiParam;
+  param = preprocessing(param);
 
   try {
     logger.info(`portal`, `requesting ${ngxRenderUrl}`);
