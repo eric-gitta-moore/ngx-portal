@@ -3,7 +3,7 @@ ARG CI=true
 WORKDIR /app
 RUN npm config set registry https://registry.npmmirror.com && npm i -g pnpm
 COPY . /app
-RUN pnpm i && pnpm run build
+RUN pnpm i && pnpm run build:prod
 
 FROM node:20-alpine3.17 AS prod
 ENV workdir=/app NODE_ENV=prod
