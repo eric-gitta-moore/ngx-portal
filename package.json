@@ -1,6 +1,6 @@
 {
   "name": "ngx-portal",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "export `cat .env | grep -v \"^#\"` && nodemon dist/main.js",
