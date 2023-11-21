@@ -2,36 +2,51 @@
 GET http://localhost/
 
 
-#### e.g. BarVerticalComponent
+#### e.g. AdvancedPieChartComponent
 POST http://localhost/portal
 Content-Type: application/json
 
-< ./data/bar.json
-
-
-### e.g. BarHorizontalComponent
-POST http://localhost/portal
-Content-Type: application/json
-
-< ./data/bar.json
-
-
-### e.g. PieChartComponent
-POST http://localhost/portal
-Content-Type: application/json
-
-< ./data/pie.json
-
-
-### e.g. LineChartComponent
-POST http://localhost/portal
-Content-Type: application/json
-
-< ./data/line.json
+< ./data/AdvancedPieChartComponent.json
 
 
 ### e.g. AreaChartComponent
 POST http://localhost/portal
 Content-Type: application/json
 
-< ./data/aria.json
+< ./data/AreaChartComponent.json
+
+
+#### e.g. BarVerticalComponent
+POST http://localhost/portal
+Content-Type: application/json
+
+< ./data/BarVerticalComponent.json
+
+
+### e.g. BarHorizontalComponent
+POST http://localhost/portal
+Content-Type: application/json
+
+< ./data/BarHorizontalComponent.json
+
+
+### e.g. PieChartComponent
+POST http://localhost/portal
+Content-Type: application/json
+
+< ./data/PieChartComponent.json
+
+
+### e.g. LineChartComponent
+POST http://localhost/portal
+Content-Type: application/json
+
+< ./data/LineChartComponent.json
+
+
+### e.g. LineChartComponent with Basis curve and autoScale
+POST http://localhost/portal
+Content-Type: application/json
+
+< ./data/LineChartComponent-basis-curve.json
+
