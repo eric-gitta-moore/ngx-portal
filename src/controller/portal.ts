@@ -2,88 +2,31 @@ import { Request, Response } from 'express';
 import { ngxRenderUrl, svg2bitmapUrl } from '../config/config';
 import logger from '../util/logger';
 import { stringify } from 'superjson';
-import { MultiSeries } from '@swimlane/ngx-charts';
+import { isMultiSeries, transformString2Date } from '../util/hepler';
+import { ChartParam, NgxRenderApiChartParam, SvgApiParam } from '../interface/portal';
 
-export type NgxOptions = {
-  [key: string]: unknown;
-  results: MultiSeries;
-};
+export function preprocessing(param: NgxRenderApiChartParam): ChartParam {
+  if (!param.ngxOptions?.results) return param;
 
-export enum ChartType {
-  AdvancedPieChartComponent = 'AdvancedPieChartComponent',
-  AreaChartComponent = 'AreaChartComponent',
-  AreaChartNormalizedComponent = 'AreaChartNormalizedComponent',
-  AreaChartStackedComponent = 'AreaChartStackedComponent',
-  BarHorizontalComponent = 'BarHorizontalComponent',
-  BarHorizontalNormalizedComponent = 'BarHorizontalNormalizedComponent',
-  BarHorizontalStackedComponent = 'BarHorizontalStackedComponent',
-  BarVerticalComponent = 'BarVerticalComponent',
-  BarVerticalNormalizedComponent = 'BarVerticalNormalizedComponent',
-  BarVerticalStackedComponent = 'BarVerticalStackedComponent',
-  BoxChartComponent = 'BoxChartComponent',
-  BubbleChartComponent = 'BubbleChartComponent',
-  GaugeComponent = 'GaugeComponent',
-  HeatMapComponent = 'HeatMapComponent',
-  LineChartComponent = 'LineChartComponent',
-  NumberCardComponent = 'NumberCardComponent',
-  PieChartComponent = 'PieChartComponent',
-  PieGridComponent = 'PieGridComponent',
-  PolarChartComponent = 'PolarChartComponent',
-  TreeMapComponent = 'TreeMapComponent',
-}
-
-export interface ChartParam {
-  type: ChartType;
-  externalCSS?: string;
-  ngxOptions?: Partial<NgxOptions>;
-}
-
-export type IndexApiParam = Partial<ChartParam>;
-
-export interface NgxRenderApiParam extends ChartParam {
-  ngxOptions?: Partial<NgxOptions>;
-}
-
-export interface SvgApiParam {
-  url?: string;
-  html?: string;
-  locator?: string;
-}
-
-export function preprocessing(param: IndexApiParam): IndexApiParam {
-  function transformString2Date(arr: any[]) {
-    function isDate(str: string): boolean {
-      try {
-        new Date(str).toISOString();
-      } catch (e) {
-        return false;
-      }
-      return true;
-    }
-
-    if (isDate(arr?.[0].name) && new Date(arr?.[0].name)?.toISOString() === arr?.[0].name) {
-      arr.map((e) => {
-        if (new Date(e.name).toISOString() === e.name) {
-          e.name = new Date(e.name);
-        }
-      });
-    }
-  }
-
-  param.ngxOptions?.results && transformString2Date(param.ngxOptions?.results);
-  param.ngxOptions?.results?.map((e) => transformString2Date(e.series));
+  const res = param.ngxOptions.results;
+  transformString2Date(res);
+  isMultiSeries(res) && res.map((e) => transformString2Date(e.series));
   return param;
 }
 
-export async function portal(req: Request, res: Response) {
-  let param: IndexApiParam = Object.assign({}, req.params, req.body) as NgxRenderApiParam;
-  param = preprocessing(param);
+export async function Portal(req: Request, res: Response) {
+  const param: NgxRenderApiChartParam = Object.assign(
+    {},
+    req.params,
+    req.body,
+  ) as NgxRenderApiChartParam;
+  const chartParam: ChartParam = preprocessing(param);
 
   try {
     logger.info(`portal`, `requesting ${ngxRenderUrl}`);
     let response = await fetch(ngxRenderUrl, {
       method: 'POST',
-      body: stringify(param),
+      body: stringify(chartParam),
       headers: { 'Content-Type': 'application/json' },
     });
     const html = await response.text();
