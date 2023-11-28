@@ -5,7 +5,7 @@ import logger from './util/logger';
 const app = express();
 const port = process.env.APP_PORT || 3001;
 
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
 
 setupRoute(app);
 

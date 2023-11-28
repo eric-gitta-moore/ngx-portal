@@ -2,6 +2,7 @@ import { MultiSeries, SingleSeries } from '@swimlane/ngx-charts';
 import { NgxRenderApiParam, SeriesType } from '../interface/portal';
 import { JSONPath } from 'jsonpath-plus';
 import { Request, Response } from 'express';
+import { groupBy, omit } from 'lodash-es';
 
 export function transformString2Date(arr: any[]) {
   function isDate(str: string): boolean {
@@ -46,18 +47,32 @@ export const defaultTranslator: Partial<Record<SeriesType, any>> = {
 
 export type TranslatorFn = (chartResults: any) => any;
 
+export function defaultSingleSeriesTranslator(
+  chartResults: any,
+  translator: any = defaultTranslator[SeriesType.SingleSeries],
+): any {
+  const transKeys = Object.keys(translator);
+  const matrix = transKeys.map((type: string) =>
+    JSONPath({ path: translator[type], json: chartResults }),
+  );
+  return zip(...matrix).map((e) => {
+    return Object.fromEntries(zip(transKeys, e));
+  });
+}
+
 export const defaultTranslatorFn: Partial<Record<SeriesType, TranslatorFn>> = {
-  [SeriesType.SingleSeries]: (chartResults: any) => {
-    const translator = defaultTranslator[SeriesType.SingleSeries];
-    const transKeys = Object.keys(translator);
-    const matrix = transKeys.map((type: string) =>
-      JSONPath({ path: translator[type], json: chartResults }),
-    );
-    return zip(...matrix).map((e) => {
-      return Object.fromEntries(zip(transKeys, e));
+  [SeriesType.SingleSeries]: defaultSingleSeriesTranslator,
+  [SeriesType.MultiSeries]: (chartResults: any) => {
+    const allData = defaultSingleSeriesTranslator(chartResults, {
+      groupName: defaultTranslator[SeriesType.MultiSeries].name,
+      ...defaultTranslator[SeriesType.MultiSeries].series,
     });
+    const grouped = groupBy(allData, 'groupName');
+    return Object.keys(grouped).map((groupName: string) => ({
+      name: groupName,
+      series: grouped[groupName].map((e) => omit(e, 'groupName')),
+    }));
   },
-  [SeriesType.MultiSeries]: (chartResults: any) => {},
 };
 
 export function applyTranslator({
