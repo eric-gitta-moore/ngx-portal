@@ -55,6 +55,9 @@ export function defaultSingleSeriesTranslator(
   const matrix = transKeys.map((type: string) =>
     JSONPath({ path: translator[type], json: chartResults }),
   );
+  // 识别判断 without group by 的情况
+  if (matrix.length === 2 && matrix[1].length === 1 && matrix[0].length === 0)
+    matrix[0].push('percentage');
   return zip(...matrix).map((e) => {
     return Object.fromEntries(zip(transKeys, e));
   });
