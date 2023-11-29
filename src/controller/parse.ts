@@ -16,6 +16,8 @@ export async function Parse(req: Request, res: Response) {
         externalCSS: '',
         ngxOptions: {
           results: req.body,
+          legend: true,
+          labels: true,
           view: [req.query.width || 700, req.query.height || 300],
         },
       },
