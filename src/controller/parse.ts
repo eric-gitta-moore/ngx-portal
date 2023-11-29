@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { ChartParam, ChartType, NgxRenderApiParam } from '../interface/portal';
+import { ChartParam, ChartType, NgxRenderApiParam, SeriesType } from '../interface/portal';
 import { applyTranslator } from '../util/hepler';
 import { Portal } from './portal';
 import logger from '../util/logger';
@@ -10,6 +10,7 @@ export async function Parse(req: Request, res: Response) {
   let uniformParam: NgxRenderApiParam = param;
   if (!param.chartParam) {
     uniformParam = {
+      seriesType: SeriesType.SingleSeries,
       chartParam: {
         type: ChartType.PieChartComponent,
         externalCSS: '',
@@ -26,6 +27,7 @@ export async function Parse(req: Request, res: Response) {
     } else if (cols.length === 2) {
       // with two group by
       uniformParam.chartParam.type = ChartType.BarVertical2DComponent;
+      uniformParam.seriesType = SeriesType.MultiSeries;
     } else {
       // without group by
       uniformParam.chartParam.type = ChartType.PieGridComponent;
