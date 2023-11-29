@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.4](https://github.com/james-curtis/ngx-portal/compare/v0.1.3...v0.1.4) (2023-11-29)
+
+
+### Bug Fixes
+
+* 对接 skydata without group by 数据 ([eb0b214](https://github.com/james-curtis/ngx-portal/commit/eb0b2146095d3b6e7a5fdb3a77cf41ecb5757569))
+
 ## [0.1.3](https://github.com/james-curtis/ngx-portal/compare/v0.1.2...v0.1.3) (2023-11-29)
 
 
