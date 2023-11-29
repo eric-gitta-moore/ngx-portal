@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.3](https://github.com/james-curtis/ngx-portal/compare/v0.1.2...v0.1.3) (2023-11-29)
+
+
+### Bug Fixes
+
+* pure enum ChartType ([c4172b8](https://github.com/james-curtis/ngx-portal/commit/c4172b8b0e9cdd1f3ac4581183eeb039e75cdde6))
+* 对接 skydata MultiSeries 数据 ([dcbe2b6](https://github.com/james-curtis/ngx-portal/commit/dcbe2b68af2c9e0fe715e3341f03eb53ef575724))
+* 对接 skydata without group by 数据 ([a1f501a](https://github.com/james-curtis/ngx-portal/commit/a1f501a6e88eaebe0d13bf0a787f42f0c195d688))
+* 对接 skydata without group by 数据 ([e6c6814](https://github.com/james-curtis/ngx-portal/commit/e6c6814dd58365fa36e661b3ee3390e334c02aea))
+* 对接 skydata without group by 数据 ([9903d23](https://github.com/james-curtis/ngx-portal/commit/9903d238b2e5e3f3c0d0679e25dbe8a4d4cf5a58))
+* 对接 skydata 数据 ([2dbb1d5](https://github.com/james-curtis/ngx-portal/commit/2dbb1d5d3de6f1db560824fad2104f80f633d042))
+
 ## [0.1.2](https://github.com/james-curtis/ngx-portal/compare/v0.1.1...v0.1.2) (2023-11-21)
 
 
