@@ -16,7 +16,7 @@ export async function Parse(req: Request, res: Response) {
         externalCSS: '',
         ngxOptions: {
           results: req.body,
-          view: [700, 300],
+          view: [req.query.width || 700, req.query.height || 300],
         },
       },
     };
@@ -26,7 +26,7 @@ export async function Parse(req: Request, res: Response) {
       uniformParam.chartParam.type = ChartType.PieChartComponent;
     } else if (cols.length === 2) {
       // with two group by
-      uniformParam.chartParam.type = ChartType.BarVertical2DComponent;
+      uniformParam.chartParam.type = ChartType.BarVerticalStackedComponent;
       uniformParam.seriesType = SeriesType.MultiSeries;
     } else {
       // without group by
