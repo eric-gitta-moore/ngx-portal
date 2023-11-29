@@ -30,6 +30,7 @@ export enum ChartType {
   BarHorizontalNormalizedComponent = 'BarHorizontalNormalizedComponent',
   BarHorizontalStackedComponent = 'BarHorizontalStackedComponent',
   BarVerticalComponent = 'BarVerticalComponent',
+  BarVertical2DComponent = 'BarVertical2DComponent',
   BarVerticalNormalizedComponent = 'BarVerticalNormalizedComponent',
   BarVerticalStackedComponent = 'BarVerticalStackedComponent',
   BoxChartComponent = 'BoxChartComponent',
