@@ -13,12 +13,17 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v4
+      - name: JSON to variables
+        uses: antifree/json-to-variables@v1.0.1
+        with:
+          filename: 'package.json'
+          prefix: 'package'
       -
         name: Docker meta
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: jamescurtisfoxmail/ngx-portal
+          images: jamescurtisfoxmail/${{ env.package_name }}
       -
         name: Login to DockerHub
         if: github.event_name != 'pull_request'
