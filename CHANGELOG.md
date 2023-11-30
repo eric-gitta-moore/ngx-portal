@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.5](https://github.com/james-curtis/ngx-portal/compare/v0.1.4...v0.1.5) (2023-11-29)
+
+
+### Bug Fixes
+
+* 修改 chartParam 缺省配置 ([27170af](https://github.com/james-curtis/ngx-portal/commit/27170af420c864031e16f65ef6677d5d791f847a))
+* 对接 skydata 数据 使用 BarVerticalStackedComponent ([61273f1](https://github.com/james-curtis/ngx-portal/commit/61273f14dc0d183106c5d8d2d78a602a1bf77193))
+
 ## [0.1.4](https://github.com/james-curtis/ngx-portal/compare/v0.1.3...v0.1.4) (2023-11-29)
 
 
