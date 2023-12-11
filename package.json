@@ -3,10 +3,10 @@
   "version": "0.1.5",
   "private": true,
   "scripts": {
-    "serve": "export `cat .env | grep -v \"^#\"` && nodemon dist/main.js",
+    "serve": "npx env-cmd -f ./.env nodemon dist/main.js",
     "serve:build": "yarn clean && cross-env NODE_ENV=development webpack watch --config webpack.config.dev.ts",
     "build:prod": "yarn clean && cross-env NODE_ENV=production webpack --config webpack.config.prod.ts",
-    "start:prod": "export `cat .env.prod | grep -v \"^#\"` && node dist/main.js",
+    "start:prod": "npx env-cmd -f ./.env.prod node dist/main.js",
     "build:docker": "docker build -t ngx-portal .",
     "prepare": "husky install",
     "clean": "rimraf dist"
@@ -23,6 +23,7 @@
     "@typescript-eslint/eslint-plugin": "^6.9.1",
     "@typescript-eslint/parser": "^6.9.1",
     "cross-env": "^7.0.3",
+    "env-cmd": "^10.1.0",
     "eslint": "^8.53.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-define-config": "^1.24.1",
